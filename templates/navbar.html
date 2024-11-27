@@ -1,0 +1,55 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+    <div class="container-fluid">
+        
+        <a class="navbar-brand" href="{% if current_user.role == 'Admin' %}{{ url_for('admin_dashboard') }}
+            {% elif current_user.role == 'Professional' %}{{ url_for('professional_dashboard') }}
+            {% else %}{{ url_for('customer_dashboard') }}{% endif %}">
+            Dashboard
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('dashboard') }}">Home</a>
+                </li>
+
+             
+                <li class="nav-item">
+                    <a class="nav-link" href="{% if current_user.role == 'Admin' %}{{ url_for('admin_search') }}
+                    {% elif current_user.role == 'Professional' %}{{ url_for('professional_search') }}
+                    {% else %}{{ url_for('search_services') }}{% endif %}">Search</a>
+                </li>
+
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="{% if current_user.role == 'Admin' %}{{ url_for('admin_summary') }}
+                    {% elif current_user.role == 'Professional' %}{{ url_for('professional_summary') }}
+                    {% else %}{{ url_for('customer_summary') }}{% endif %}">Summary</a>
+                </li>
+
+             
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+
+              
+                {% if current_user.role != 'Admin' %}
+                <li class="nav-item">
+                    <form action="{{ url_for('delete_account') }}" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-link nav-link text-warning">Delete Account</button>
+                    </form>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+

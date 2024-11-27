@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Create Service Request</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <h1>Create a Service Request</h1>
+    <form method="POST">
+        <label for="service_id">Choose a Service:</label>
+        <select name="service_id" required>
+            {% for service in services %}
+                <option value="{{ service.id }}">{{ service.name }} - ₹{{ service.price }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="remarks">Remarks (optional):</label>
+        <textarea name="remarks"></textarea><br>
+
+        <button type="submit">Submit Request</button>
+    </form>
+</body>
+</html>

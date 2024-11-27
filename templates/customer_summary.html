@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Summary</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+
+    {% include 'navbar.html' %}
+
+    <h1 class="my-4">My Service Summary</h1>
+
+  
+    <ul class="list-group mb-4">
+        <li class="list-group-item">Total Service Requests: {{ summary_data.total_requests | default(0) }}</li>
+        <li class="list-group-item">Completed Services: {{ summary_data.completed_requests | default(0) }}</li>
+        <li class="list-group-item">Average Rating: {{ summary_data.average_rating | default(0) }}</li>
+    </ul>
+
+   
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Total Requests</td>
+                <td>{{ summary_data.total_requests | default(0) }}</td>
+            </tr>
+            <tr>
+                <td>Completed Services</td>
+                <td>{{ summary_data.completed_requests | default(0) }}</td>
+            </tr>
+            <tr>
+                <td>Average Rating</td>
+                <td>{{ summary_data.average_rating | default(0) }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+   
+    <a href="{{ url_for('customer_dashboard') }}" class="btn btn-primary mt-4">Back to Dashboard</a>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Service Requests</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+    {% include 'navbar.html' %}
+
+    <h1 class="my-4">My Service Requests</h1>
+    <ul class="list-group">
+        {% for request in requests %}
+            <li class="list-group-item">
+                <strong>Service:</strong> {{ request.service.name }} <br>
+                <strong>Status:</strong> {{ request.status }} <br>
+                <strong>Remarks:</strong> {{ request.remarks }} <br>
+                
+                {% if request.status == 'completed' %}
+                    <strong>Rating:</strong> {{ request.rating if request.rating else "Not rated" }} <br>
+                    <strong>Review:</strong> {{ request.review if request.review else "No review" }} <br>
+                    {% if not request.rating %}
+                        <a href="{{ url_for('add_review', request_id=request.id) }}" class="btn btn-primary mt-2">Add Review</a>
+                    {% endif %}
+                {% endif %}
+            </li>
+        {% else %}
+            <li class="list-group-item">No service requests found.</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('customer_dashboard') }}" class="btn btn-primary mt-4">Back to Dashboard</a>
+</body>
+</html>
